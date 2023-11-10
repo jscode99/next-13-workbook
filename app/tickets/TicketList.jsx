@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link';
 
 async function getTicket() {
   const res = await fetch('http://localhost:4000/tickets', {
@@ -10,6 +11,9 @@ async function getTicket() {
 }
 
 export default async function TicketList() {
+  // imitate delay
+  await new Promise(resolve => setTimeout(resolve, 3000))
+
   const tickets = await getTicket()
 
   if (tickets.length === 0) {
@@ -21,12 +25,14 @@ export default async function TicketList() {
   return (
     <>
       {tickets.map((ticket) => (
-        <div key={ticket.id} className='card my-5'>
-          <h3>{ticket.title}</h3>
-          <p>{ticket.body.slice(0, 300)}...</p>
-          <div className={`pill ${ticket.priority}`}>
-            {ticket.priority} priority
-          </div>
+        <div key={ticket.id} className='card my-5 cursor-pointer'>
+          <Link href={`/tickets/${ticket.id}`}>
+            <h3>{ticket.title}</h3>
+            <p>{ticket.body.slice(0, 300)}...</p>
+            <div className={`pill ${ticket.priority}`}>
+              {ticket.priority} priority
+            </div>
+          </Link>
         </div>
       ))}
     </>

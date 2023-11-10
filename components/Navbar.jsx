@@ -13,7 +13,7 @@ function Navbar() {
         quality={100}
         priority={true}
       />
-      <h1>Ma&apos; HelpDesk</h1>
+      <h1>Your HelpDesk</h1>
       <Link href='/'>Dashboards</Link>
       <Link href='/tickets'>Tickets</Link>
     </nav>
